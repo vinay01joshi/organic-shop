@@ -3,6 +3,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/observable/of';
 
 import { ActivatedRoute } from "@angular/router";
 import { AppUser } from './models/app-user';
@@ -33,7 +34,11 @@ export class AuthService {
 
   get appUser$() : Observable<AppUser> {
     return this.user$
-    .switchMap(user => this.userService.get(user.uid))
+    .switchMap(user => {
+      if(user) return this.userService.get(user.uid);
+
+      return Observable.of(null);
+    })
   }
 
 }
