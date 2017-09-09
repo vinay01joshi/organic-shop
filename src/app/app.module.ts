@@ -8,7 +8,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { CustomFormsModule } from 'ng2-validation';
 // Project Modues
 import { AppComponent } from './app.component';
 import { environment } from "../environments/environment";
@@ -48,10 +48,11 @@ import { ProductService } from './product.service';
   imports: [
     BrowserModule,
     FormsModule,
+    CustomFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    NgbModule.forRoot(),
+    NgbModule.forRoot(),    
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'login', component: LoginComponent },
