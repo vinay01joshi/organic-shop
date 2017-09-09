@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CatagoryService } from '../../catagory.service';
 
 @Component({
   selector: 'app-product-form',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductFormComponent implements OnInit {
 
-  constructor() { }
+  catagories$;
+  constructor(catagoryService: CatagoryService) {
+     this.catagories$ = catagoryService.getCategories();
+  }
 
   ngOnInit() {
   }
