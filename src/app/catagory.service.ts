@@ -6,8 +6,8 @@ export class CatagoryService {
 
   constructor(private db: AngularFireDatabase) { }
 
-  getCategories() {
-    return this.db.list('/catagories',{
+  getAll() {
+    return this.db.list('/catagories/',{
       query: {
         orderByChild: 'name'
       }
