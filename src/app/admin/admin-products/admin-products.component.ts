@@ -13,7 +13,6 @@ import { DataTableResource } from 'angular-4-data-table';
 export class AdminProductsComponent implements OnInit, OnDestroy {
   itemCount: number;
   products: Product[];
-  filteredProducts: any[];
   subscription: Subscription;
   tableResource: DataTableResource<Product>;
   items: Product[] = [];
@@ -21,24 +20,25 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductService) {
     this.subscription = this.productService.getAll()
       .subscribe(products => {
-        this.filteredProducts = this.products = products;
-
+        this.products = products;
         this.initializeTable(products);
       });
   }
 
   private initializeTable(products: Product[]) {
     this.tableResource = new DataTableResource(products);
-    this.tableResource.query({ offset: 10 })
+    this.tableResource.query({ offset: 0 })
       .then(items => this.items = items);
     this.tableResource.count()
       .then(count => this.itemCount = count);
   }
 
   filter(query: string) {
-    this.filteredProducts = (query) ?
+    let filteredProducts = (query) ?
       this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) :
       this.products;
+
+    this.initializeTable(filteredProducts);
   }
 
   reloadItems(params) {
