@@ -9,11 +9,19 @@ export class ShoppingCartService {
   constructor(private db: AngularFireDatabase) { }
 
   async addToCart(product: Product) {
-     let cartId = await this.getOrCreateCartId();
-     let item$ = this.getItem(cartId, product.$key);
-     item$.take(1).subscribe(item => {
-      item$.update({ product: product, quantity: (item.quantity || 0) +1 });
-     });
+    this.updateItemQunatity(product, 1);
+  }
+
+  async removeFromCart(product: Product) {
+    this.updateItemQunatity(product, -1);
+  }
+
+  private async updateItemQunatity(product: Product, change: number) {
+    let cartId = await this.getOrCreateCartId();
+    let item$ = this.getItem(cartId, product.$key);
+    item$.take(1).subscribe(item => {
+     item$.update({ product: product, quantity: (item.quantity || 0) + change });
+    });
   }
 
   private getItem(cartId:string , productId: string){
@@ -26,12 +34,12 @@ export class ShoppingCartService {
     })
   }
 
- async getCart() {
+  async getCart() {
     let cartId = await this.getOrCreateCartId();
     return this.db.object('/shopping-carts/'+ cartId);
   }
 
- private async getOrCreateCartId(): Promise<string> {   
+  private async getOrCreateCartId(): Promise<string> {   
     let cartId = localStorage.getItem('cartId');
     if(cartId) return cartId;
 
