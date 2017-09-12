@@ -1,3 +1,4 @@
+  import { AdminModule } from './admin/admin.module';
 import { SharedModule } from './shared/shared.module';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -11,10 +12,10 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { CustomFormsModule } from 'ng2-validation';
 
 import { environment } from '../environments/environment';
-import { AdminAuthGuard } from './admin-auth-guard.service';
-import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
-import { AdminProductsComponent } from './admin/admin-products/admin-products.component';
-import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { AdminAuthGuard } from './admin/services/admin-auth-guard.service';
+import { AdminOrdersComponent } from './admin/components/admin-orders/admin-orders.component';
+import { AdminProductsComponent } from './admin/components/admin-products/admin-products.component';
+import { ProductFormComponent } from './admin/components/product-form/product-form.component';
 import { AppComponent } from './app.component';
 import { BsNavbarComponent } from './bs-navbar/bs-navbar.component';
 import { CheckOutComponent } from './check-out/check-out.component';
@@ -38,11 +39,8 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     ShoppingCartComponent,
     CheckOutComponent,
     OrderSuccessComponent,
-    MyOrdersComponent,
-    AdminProductsComponent,
-    AdminOrdersComponent,
+    MyOrdersComponent,    
     LoginComponent,
-    ProductFormComponent,
     ProductFilterComponent,   
     ShoppingCartSummaryComponent,
     ShippingFormComponent
@@ -50,6 +48,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
   imports: [
     BrowserModule,
     SharedModule,
+    AdminModule,
     FormsModule,
     CustomFormsModule,
     DataTableModule,
@@ -65,34 +64,10 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGurad] },
       { path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGurad] },
-      { path: 'my/orders', component: MyOrdersComponent,canActivate: [AuthGurad] },
-            
-      { 
-        path: 'admin/products/new', 
-        component: ProductFormComponent, 
-        canActivate: [AuthGurad, AdminAuthGuard] 
-      },
-      { 
-        path: 'admin/products/:id', 
-        component: ProductFormComponent, 
-        canActivate: [AuthGurad, AdminAuthGuard] 
-      },
-      { 
-        path: 'admin/products', 
-        component: AdminProductsComponent, 
-        canActivate: [AuthGurad, AdminAuthGuard] 
-      },
-      { 
-        path: 'admin/orders', 
-        component: AdminOrdersComponent, 
-        canActivate: [AuthGurad, AdminAuthGuard] 
-      }    
-    ])
-    
+      { path: 'my/orders', component: MyOrdersComponent,canActivate: [AuthGurad] }  
+    ])    
   ],
-  providers: [
-    AdminAuthGuard   
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

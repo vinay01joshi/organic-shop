@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CatagoryService } from '../../shared/services/catagory.service';
-import { ProductService } from '../../shared/services/product.service';
+import { CatagoryService } from '../../../shared/services/catagory.service';
+import { ProductService } from '../../../shared/services/product.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/take';
 
