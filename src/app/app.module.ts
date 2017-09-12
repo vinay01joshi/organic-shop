@@ -71,7 +71,7 @@ import { OrderService } from './order.service';
       { path: 'shopping-cart', component: ShoppingCartComponent },
 
       { path: 'check-out', component: CheckOutComponent, canActivate: [AuthGurad] },
-      { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGurad] },
+      { path: 'order-success/:id', component: OrderSuccessComponent, canActivate: [AuthGurad] },
       { path: 'my/orders', component: MyOrdersComponent,canActivate: [AuthGurad] },
             
       { 
