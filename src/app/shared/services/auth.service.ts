@@ -6,7 +6,7 @@ import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/observable/of';
 
 import { ActivatedRoute } from "@angular/router";
-import { AppUser } from './models/app-user';
+import { AppUser } from '../models/app-user';
 import { UserService } from './user.service';
 
 
