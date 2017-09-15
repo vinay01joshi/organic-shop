@@ -1,28 +1,48 @@
-<h1>Order Details</h1>
-<p> Ordered on 8 June 2017 | Order <span class="order-code">#-Ktt5DnJLQRnGuNWLswc</span> </p>
-<div class="card">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-4">
-                <table class="table border-0">
-                    <tbody>
-                        <tr>
-                            <td>Address Line 1</td>
-                        </tr>
-                        <tr>
-                            <td>Address Line 2</td>
-                        </tr>
-                        <tr>
-                            <td>City</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-4">
-                Credit Card Payment
-            </div>
-            <div class="col-4">
-                Item(s) Subtotal $123 shipping $50 tootal : $342 Promotion Appled : $232 Grand Total : $43242
+<div *ngIf="order$ |async as order">
+    <h1>Order Details</h1>
+    <p> Ordered on 8 June 2017 | Order <span class="order-code"> {{ orderId }}</span> </p>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <table class="table border-0">
+                        <tbody>
+                            <tr>
+                                <td> {{ order[2].addressLine1 }} </td>
+                            </tr>
+                            <tr>
+                                <td> {{ order[2].addressLine2 }} </td>
+                            </tr>
+                            <tr>
+                                <td> {{ order[2].city }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-4">
+                    <table class="table border-0">
+                        <tbody>
+                            <tr>
+                                <td>Payment Method</td>
+                            </tr>
+                            <tr>
+                                <td>Net Banking : All citybak Mater Cartd</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-4">
+                    <table class="table border-0">
+                        <tbody>
+                            <tr *ngFor="let item of order[1]">
+                                {{ item.totoalPrice }}
+                            </tr>
+                        </tbody>
+                        <tfoot>
+
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

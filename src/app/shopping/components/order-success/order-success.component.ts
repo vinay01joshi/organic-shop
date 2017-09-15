@@ -1,3 +1,5 @@
+import { Router, ActivatedRoute } from '@angular/router';
+import { OrderService } from '../../../shared/services/order.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderSuccessComponent implements OnInit {
 
-  constructor() { }
+  order$;
+  orderId;
+  constructor(private orderService: OrderService ,private route: ActivatedRoute) {
+    this.orderId = this.route.snapshot.paramMap.get('id');
+    this.order$ = orderService.getOrderByOrderId(this.orderId)
+  }
 
   ngOnInit() {
   }

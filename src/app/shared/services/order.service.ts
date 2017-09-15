@@ -26,4 +26,8 @@ export class OrderService {
     });
   }
 
+  getOrderByOrderId(orderId: string) {
+    return this.db.list('/orders/' + orderId);
+  }
+
 }
